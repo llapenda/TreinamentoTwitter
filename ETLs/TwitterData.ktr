@@ -435,6 +435,30 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>conn_postgres_ce</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>treinamento</database>
+    <port>5432</port>
+    <username>leticialapenda</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
       <from>Data Grid</from>
@@ -459,6 +483,11 @@
     <hop>
       <from>REST Client</from>
       <to>input_json</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>interpretar json</from>
+      <to>Stage</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1007,6 +1036,118 @@
     </remotesteps>
     <GUI>
       <xloc>688</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Stage</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>conn_postgres_ce</connection>
+    <schema>sch_twitter_treinamento</schema>
+    <table>stage</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>status</column_name>
+          <stream_name>status</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_id</column_name>
+          <stream_name>tweet_id</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_texto</column_name>
+          <stream_name>tweet_texto</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_data</column_name>
+          <stream_name>tweet_data</stream_name>
+        </field>
+        <field>
+          <column_name>user_id_1</column_name>
+          <stream_name>user_id_1</stream_name>
+        </field>
+        <field>
+          <column_name>user_name</column_name>
+          <stream_name>user_name</stream_name>
+        </field>
+        <field>
+          <column_name>user_screen_name</column_name>
+          <stream_name>user_screen_name</stream_name>
+        </field>
+        <field>
+          <column_name>user_location</column_name>
+          <stream_name>user_location</stream_name>
+        </field>
+        <field>
+          <column_name>hashtag</column_name>
+          <stream_name>hashtag</stream_name>
+        </field>
+        <field>
+          <column_name>user_mentions</column_name>
+          <stream_name>user_mentions</stream_name>
+        </field>
+        <field>
+          <column_name>url_tweet</column_name>
+          <stream_name>url_tweet</stream_name>
+        </field>
+        <field>
+          <column_name>media</column_name>
+          <stream_name>media</stream_name>
+        </field>
+        <field>
+          <column_name>media_count</column_name>
+          <stream_name>media_count</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_amigos</column_name>
+          <stream_name>user_qtd_amigos</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_seguidores</column_name>
+          <stream_name>user_qtd_seguidores</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_listas</column_name>
+          <stream_name>user_qtd_listas</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_likes</column_name>
+          <stream_name>user_qtd_likes</stream_name>
+        </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
