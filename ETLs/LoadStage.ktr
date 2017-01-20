@@ -557,14 +557,6 @@
           <stream_name>user_location</stream_name>
         </field>
         <field>
-          <column_name>user_qtd_amigos</column_name>
-          <stream_name>user_qtd_amigos</stream_name>
-        </field>
-        <field>
-          <column_name>user_qtd_seguidores</column_name>
-          <stream_name>user_qtd_seguidores</stream_name>
-        </field>
-        <field>
           <column_name>user_qtd_listas</column_name>
           <stream_name>user_qtd_listas</stream_name>
         </field>
