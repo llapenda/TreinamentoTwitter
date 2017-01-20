@@ -467,7 +467,27 @@
     </hop>
     <hop>
       <from>interpretar json 2</from>
+      <to>Separar data</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Concatenar Data</from>
       <to>Stage</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Separar data</from>
+      <to>Corrigir Dia</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Corrigir Dia</from>
+      <to>Corrigir Mes</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Corrigir Mes</from>
+      <to>Concatenar Data</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -600,6 +620,10 @@
           <column_name>interaction_type</column_name>
           <stream_name>interaction_type</stream_name>
         </field>
+        <field>
+          <column_name>data</column_name>
+          <stream_name>data</stream_name>
+        </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -609,8 +633,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>208</yloc>
+      <xloc>848</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -678,8 +702,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>208</yloc>
+      <xloc>48</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -855,8 +879,296 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>208</yloc>
+      <xloc>208</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Separar data</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>tweet_data</in_stream_name>
+        <out_stream_name>dia</out_stream_name>
+        <cut_from>8</cut_from>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>tweet_data</in_stream_name>
+        <out_stream_name>mes</out_stream_name>
+        <cut_from>4</cut_from>
+        <cut_to>7</cut_to>
+      </field>
+      <field>
+        <in_stream_name>tweet_data</in_stream_name>
+        <out_stream_name>ano</out_stream_name>
+        <cut_from>26</cut_from>
+        <cut_to>30</cut_to>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Corrigir Dia</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>dia</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>1</source_value>
+        <target_value>01</target_value>
+      </field>
+      <field>
+        <source_value>2</source_value>
+        <target_value>02</target_value>
+      </field>
+      <field>
+        <source_value>3</source_value>
+        <target_value>03</target_value>
+      </field>
+      <field>
+        <source_value>4</source_value>
+        <target_value>04</target_value>
+      </field>
+      <field>
+        <source_value>5</source_value>
+        <target_value>05</target_value>
+      </field>
+      <field>
+        <source_value>6</source_value>
+        <target_value>06</target_value>
+      </field>
+      <field>
+        <source_value>7</source_value>
+        <target_value>07</target_value>
+      </field>
+      <field>
+        <source_value>8</source_value>
+        <target_value>08</target_value>
+      </field>
+      <field>
+        <source_value>9</source_value>
+        <target_value>09</target_value>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Concatenar Data</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ano</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>4</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>mes</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>dia</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>data</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Corrigir Mes</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>mes</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>Jan</source_value>
+        <target_value>01</target_value>
+      </field>
+      <field>
+        <source_value>Fev</source_value>
+        <target_value>02</target_value>
+      </field>
+      <field>
+        <source_value>Mar</source_value>
+        <target_value>03</target_value>
+      </field>
+      <field>
+        <source_value>Abr</source_value>
+        <target_value>04</target_value>
+      </field>
+      <field>
+        <source_value>May</source_value>
+        <target_value>05</target_value>
+      </field>
+      <field>
+        <source_value>Jun</source_value>
+        <target_value>06</target_value>
+      </field>
+      <field>
+        <source_value>Jul</source_value>
+        <target_value>07</target_value>
+      </field>
+      <field>
+        <source_value>Aug</source_value>
+        <target_value>08</target_value>
+      </field>
+      <field>
+        <source_value>Set</source_value>
+        <target_value>09</target_value>
+      </field>
+      <field>
+        <source_value>Out</source_value>
+        <target_value>10</target_value>
+      </field>
+      <field>
+        <source_value>Nov</source_value>
+        <target_value>11</target_value>
+      </field>
+      <field>
+        <source_value>Dec</source_value>
+        <target_value>12</target_value>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
