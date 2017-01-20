@@ -430,7 +430,7 @@
     <created_date>2017&#x2f;01&#x2f;19 10&#x3a;40&#x3a;43.352</created_date>
     <modified_user>-</modified_user>
     <modified_date>2017&#x2f;01&#x2f;19 10&#x3a;40&#x3a;43.352</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -476,17 +476,17 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>input_json</from>
-      <to>interpretar json</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>REST Client</from>
       <to>input_json</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>interpretar json</from>
+      <from>input_json</from>
+      <to>interpretar json 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>interpretar json 2</from>
       <to>Stage</to>
       <enabled>Y</enabled>
     </hop>
@@ -774,8 +774,8 @@
     </step>
 
   <step>
-    <name>resultados_json</name>
-    <type>TextFileOutput</type>
+    <name>Stage</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -784,50 +784,96 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>&#x2f;Users&#x2f;leticialapenda&#x2f;Documents&#x2f;Oncase&#x2f;Projetos&#x2f;TreinamentoTwitter&#x2f;RESULTADO_Twitter</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>json</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
+    <connection>conn_postgres_ce</connection>
+    <schema>sch_twitter_treinamento</schema>
+    <table>stage</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
-      <field>
-        <name>result</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
+        <field>
+          <column_name>status</column_name>
+          <stream_name>status</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_id</column_name>
+          <stream_name>tweet_id</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_texto</column_name>
+          <stream_name>tweet_texto</stream_name>
+        </field>
+        <field>
+          <column_name>tweet_data</column_name>
+          <stream_name>tweet_data</stream_name>
+        </field>
+        <field>
+          <column_name>user_id_1</column_name>
+          <stream_name>user_id_1</stream_name>
+        </field>
+        <field>
+          <column_name>user_name</column_name>
+          <stream_name>user_name</stream_name>
+        </field>
+        <field>
+          <column_name>user_screen_name</column_name>
+          <stream_name>user_screen_name</stream_name>
+        </field>
+        <field>
+          <column_name>user_location</column_name>
+          <stream_name>user_location</stream_name>
+        </field>
+        <field>
+          <column_name>user_destino</column_name>
+          <stream_name>user_destino</stream_name>
+        </field>
+        <field>
+          <column_name>hashtag</column_name>
+          <stream_name>hashtag</stream_name>
+        </field>
+        <field>
+          <column_name>user_mentions</column_name>
+          <stream_name>user_mentions</stream_name>
+        </field>
+        <field>
+          <column_name>url_tweet</column_name>
+          <stream_name>url_tweet</stream_name>
+        </field>
+        <field>
+          <column_name>media</column_name>
+          <stream_name>media</stream_name>
+        </field>
+        <field>
+          <column_name>media_count</column_name>
+          <stream_name>media_count</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_amigos</column_name>
+          <stream_name>user_qtd_amigos</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_seguidores</column_name>
+          <stream_name>user_qtd_seguidores</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_listas</column_name>
+          <stream_name>user_qtd_listas</stream_name>
+        </field>
+        <field>
+          <column_name>user_qtd_likes</column_name>
+          <stream_name>user_qtd_likes</stream_name>
+        </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -837,136 +883,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>interpretar json</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var tweet_id			&#x3d; status&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xa;var tweet_texto			&#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var tweet_data			&#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d;&#x3b;&#xa;var user_id				&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xa;var user_name        	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var user_screen_name 	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xa;var user_location    	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_amigos		&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_seguidores	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_listas		&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_likes		&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;favourites_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var hashtag     		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d;&#x29;&#x3b;&#xd;&#xa;var user_mentions		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d;&#x29;&#x3b;&#xd;&#xa;var url_tweet			&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;urls&#x22;&#x5d;&#x29;&#x3b;&#xa;var media       		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x29;&#x3b;&#xa;var media_count 		&#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; 0 &#x3a; &#xa;							status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;.length&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xa;&#x2f;&#x2a;&#xa;&#xa;&#xa;id_user	&#x24;.statuses.&#x2a;.user.id	None							none	N&#xa;name	&#x24;.statuses.&#x2a;.user.name	None							none	N&#xa;screen_name	&#x24;.statuses.&#x2a;.user.screen_name	None							none	N&#xa;location	&#x24;.statuses.&#x2a;.user.location	None							none	N&#xa;description_profile	&#x24;.statuses.&#x2a;.user.description	None							none	N&#xa;url_profile	&#x24;.statuses.&#x2a;.user.url	None							none	N&#xa;followers_count	&#x24;.statuses.&#x2a;.user.followers_count	None							none	N&#xa;friends_count	&#x24;.statuses.&#x2a;.user.friends_count	None							none	N&#xa;listed_count	&#x24;.statuses.&#x2a;.user.listed_count	None							none	N&#xa;time_zone	&#x24;.statuses.&#x2a;.user.time_zone	None							none	N&#xa;text	&#x24;.statuses.&#x2a;.text	None							none	N&#xa;id_twiter	&#x24;.statuses.&#x2a;.id	None							none	N&#xa;retweet_count	&#x24;.statuses.&#x2a;.retweet_count	None							none	N&#xa;created_at_twitter	&#x24;.statuses.&#x2a;.created_at	None							none	N&#xa;hashtags	&#x24;.statuses.&#x2a;.entities.hashtags	None							none	N&#xa;&#x2a;&#x2f;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>Item_0</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>tweet_id</name>
-        <rename>tweet_id</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tweet_texto</name>
-        <rename>tweet_texto</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>tweet_data</name>
-        <rename>tweet_data</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_id</name>
-        <rename>user_id</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_name</name>
-        <rename>user_name</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_screen_name</name>
-        <rename>user_screen_name</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_location</name>
-        <rename>user_location</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>hashtag</name>
-        <rename>hashtag</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_mentions</name>
-        <rename>user_mentions</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>url_tweet</name>
-        <rename>url_tweet</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>media</name>
-        <rename>media</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>media_count</name>
-        <rename>media_count</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_qtd_amigos</name>
-        <rename>user_qtd_amigos</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_qtd_seguidores</name>
-        <rename>user_qtd_seguidores</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_qtd_listas</name>
-        <rename>user_qtd_listas</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>user_qtd_likes</name>
-        <rename>user_qtd_likes</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
+      <xloc>1008</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1042,8 +959,8 @@
     </step>
 
   <step>
-    <name>Stage</name>
-    <type>TableOutput</type>
+    <name>resultados_json</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1052,92 +969,50 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>conn_postgres_ce</connection>
-    <schema>sch_twitter_treinamento</schema>
-    <table>stage</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x2f;Users&#x2f;leticialapenda&#x2f;Documents&#x2f;Oncase&#x2f;Projetos&#x2f;TreinamentoTwitter&#x2f;RESULTADO_Twitter</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>json</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
-        <field>
-          <column_name>status</column_name>
-          <stream_name>status</stream_name>
-        </field>
-        <field>
-          <column_name>tweet_id</column_name>
-          <stream_name>tweet_id</stream_name>
-        </field>
-        <field>
-          <column_name>tweet_texto</column_name>
-          <stream_name>tweet_texto</stream_name>
-        </field>
-        <field>
-          <column_name>tweet_data</column_name>
-          <stream_name>tweet_data</stream_name>
-        </field>
-        <field>
-          <column_name>user_id_1</column_name>
-          <stream_name>user_id_1</stream_name>
-        </field>
-        <field>
-          <column_name>user_name</column_name>
-          <stream_name>user_name</stream_name>
-        </field>
-        <field>
-          <column_name>user_screen_name</column_name>
-          <stream_name>user_screen_name</stream_name>
-        </field>
-        <field>
-          <column_name>user_location</column_name>
-          <stream_name>user_location</stream_name>
-        </field>
-        <field>
-          <column_name>hashtag</column_name>
-          <stream_name>hashtag</stream_name>
-        </field>
-        <field>
-          <column_name>user_mentions</column_name>
-          <stream_name>user_mentions</stream_name>
-        </field>
-        <field>
-          <column_name>url_tweet</column_name>
-          <stream_name>url_tweet</stream_name>
-        </field>
-        <field>
-          <column_name>media</column_name>
-          <stream_name>media</stream_name>
-        </field>
-        <field>
-          <column_name>media_count</column_name>
-          <stream_name>media_count</stream_name>
-        </field>
-        <field>
-          <column_name>user_qtd_amigos</column_name>
-          <stream_name>user_qtd_amigos</stream_name>
-        </field>
-        <field>
-          <column_name>user_qtd_seguidores</column_name>
-          <stream_name>user_qtd_seguidores</stream_name>
-        </field>
-        <field>
-          <column_name>user_qtd_listas</column_name>
-          <stream_name>user_qtd_listas</stream_name>
-        </field>
-        <field>
-          <column_name>user_qtd_likes</column_name>
-          <stream_name>user_qtd_likes</stream_name>
-        </field>
+      <field>
+        <name>result</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -1147,7 +1022,142 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>512</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>interpretar json 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var status &#x3d; JSON.parse&#x28;status&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var tweet_id			&#x3d; status&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xa;var tweet_texto			&#x3d; status&#x5b;&#x22;text&#x22;&#x5d;&#x3b;&#xd;&#xa;var tweet_data			&#x3d; status&#x5b;&#x22;created_at&#x22;&#x5d;&#x3b;&#xa;var user_destino		&#x3d; status&#x5b;&#x22;in_reply_to_screen_name&#x22;&#x5d;&#x3b;&#xa;var user_id				&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;id_str&#x22;&#x5d;&#x3b;&#xa;var user_name        	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;name&#x22;&#x5d;&#x3b;&#xa;var user_screen_name 	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;screen_name&#x22;&#x5d;&#x3b;&#xa;var user_location    	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;location&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_amigos		&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;friends_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_seguidores	&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;followers_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_listas		&#x3d; status&#x5b;&#x22;user&#x22;&#x5d;&#x5b;&#x22;listed_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var user_qtd_likes		&#x3d; status&#x5b;&#x22;favorite_count&#x22;&#x5d;&#x3b;&#xd;&#xa;var hashtag     		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;hashtags&#x22;&#x5d;&#x29;&#x3b;&#xd;&#xa;var user_mentions		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;user_mentions&#x22;&#x5d;&#x29;&#x3b;&#xd;&#xa;var url_tweet			&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;urls&#x22;&#x5d;&#x29;&#x3b;&#xa;var media       		&#x3d; JSON.stringify&#x28;status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;&#x29;&#x3b;&#xa;var media_count 		&#x3d; typeof status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22; &#x3f; 0 &#x3a; &#xa;							status&#x5b;&#x22;entities&#x22;&#x5d;&#x5b;&#x22;media&#x22;&#x5d;.length&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xa;&#x2f;&#x2a;&#xa;&#xa;&#xa;id_user	&#x24;.statuses.&#x2a;.user.id	None							none	N&#xa;name	&#x24;.statuses.&#x2a;.user.name	None							none	N&#xa;screen_name	&#x24;.statuses.&#x2a;.user.screen_name	None							none	N&#xa;location	&#x24;.statuses.&#x2a;.user.location	None							none	N&#xa;description_profile	&#x24;.statuses.&#x2a;.user.description	None							none	N&#xa;url_profile	&#x24;.statuses.&#x2a;.user.url	None							none	N&#xa;followers_count	&#x24;.statuses.&#x2a;.user.followers_count	None							none	N&#xa;friends_count	&#x24;.statuses.&#x2a;.user.friends_count	None							none	N&#xa;listed_count	&#x24;.statuses.&#x2a;.user.listed_count	None							none	N&#xa;time_zone	&#x24;.statuses.&#x2a;.user.time_zone	None							none	N&#xa;text	&#x24;.statuses.&#x2a;.text	None							none	N&#xa;id_twiter	&#x24;.statuses.&#x2a;.id	None							none	N&#xa;retweet_count	&#x24;.statuses.&#x2a;.retweet_count	None							none	N&#xa;created_at_twitter	&#x24;.statuses.&#x2a;.created_at	None							none	N&#xa;hashtags	&#x24;.statuses.&#x2a;.entities.hashtags	None							none	N&#xa;&#x2a;&#x2f;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>tweet_id</name>
+        <rename>tweet_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>tweet_texto</name>
+        <rename>tweet_texto</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>tweet_data</name>
+        <rename>tweet_data</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_id</name>
+        <rename>user_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_name</name>
+        <rename>user_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_screen_name</name>
+        <rename>user_screen_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_location</name>
+        <rename>user_location</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_destino</name>
+        <rename>user_destino</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>hashtag</name>
+        <rename>hashtag</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_mentions</name>
+        <rename>user_mentions</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>url_tweet</name>
+        <rename>url_tweet</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>media</name>
+        <rename>media</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>media_count</name>
+        <rename>media_count</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_qtd_amigos</name>
+        <rename>user_qtd_amigos</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_qtd_seguidores</name>
+        <rename>user_qtd_seguidores</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_qtd_listas</name>
+        <rename>user_qtd_listas</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_qtd_likes</name>
+        <rename>user_qtd_likes</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
